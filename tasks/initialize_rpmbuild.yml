@@ -1,6 +1,6 @@
 - name: Init python env | Update pip
   file:
-    path: {{ item }}
+    path: "{{ item }}"
     state: directory
   with_items:
   - "{{ rpmbuild_build_dir }}"
