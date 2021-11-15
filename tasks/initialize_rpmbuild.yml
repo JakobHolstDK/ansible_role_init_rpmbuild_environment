@@ -3,11 +3,11 @@
     path: {{ item }}
     state: directory
   with_items:
-    - "{{ rpmbuild_build_dir }}"
-    - "{{ rpmbuild_build_dir }}/BUILD"
-    - "{{ rpmbuild_build_dir }}/SOURCES"
-    - "{{ rpmbuild_build_dir }}/SPECS"
-    - "{{ rpmbuild_build_dir }}/SRPMS"
-    - "{{ rpmbuild_build_dir }}/RPMS"
-    - "{{ rpmbuild_build_dir }}/RPMS/noarch"
-    - "{{ rpmbuild_build_dir }}/RPMS/{{ ansible_userspace_architecture }}"
+  - "{{ rpmbuild_build_dir }}"
+  - "{{ rpmbuild_build_dir }}/BUILD"
+  - "{{ rpmbuild_build_dir }}/SOURCES"
+  - "{{ rpmbuild_build_dir }}/SPECS"
+  - "{{ rpmbuild_build_dir }}/SRPMS"
+  - "{{ rpmbuild_build_dir }}/RPMS"
+  - "{{ rpmbuild_build_dir }}/RPMS/noarch"
+  - "{{ rpmbuild_build_dir }}/RPMS/{{ ansible_userspace_architecture }}"
