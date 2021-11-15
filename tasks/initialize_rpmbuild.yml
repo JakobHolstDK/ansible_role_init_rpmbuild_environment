@@ -1,39 +1,13 @@
-- name: init python  env | check if we're building on a supported os
-  assert:
-    fail_msg: "{{ role_name }} only supports ubuntu versions 16, 18, 20 and centos versions 6, 7!"
-    success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
-    quiet: "{{ not ansible_check_mode }}"
-    that:
-      ( ansible_distribution == "Ubuntu" and ansible_distribution_version|int in [16, 18, 20] )
-      or ( ansible_distribution == "CentOS" and ansible_distribution_major_version|int in [7, 8] )
-      or ( ansible_distribution|lower == "redhat" and ansible_distribution_major_version|int in [8] )
-
-
-- name: init python env | Install tools on build servers
-  ansible.builtin.package:
-    name:  '{{ item  }}'
-    state: present
-  with_items:
-    - "git"
-    - "python3-pip"
-    - "python3-devel"
-    - "make" 
-    - "autoconf" 
-    - "automake" 
-    - "libtool" 
-    - "gcc"
-    - "zlib-devel"
-    - "rpm-build"
-    - "tree"
-    - "python3-virtualenv"
-    - "help2man"
-    - "scl-utils-build"
-    - "scl-utils"
-    - "libffi-devel"
-    - "createrepo"
-    - "python2-psycopg2"
-  become: True
-
 - name: Init python env | Update pip
-  pip:
-    name: pip
+  file:
+    path: {{ item }}
+    state: directory
+  with_items:
+    - "{{ rpmbuild_build_dir }}"
+    - "{{ rpmbuild_build_dir }}/BUILD"
+    - "{{ rpmbuild_build_dir }}/SOURCES"
+    - "{{ rpmbuild_build_dir }}/SPECS"
+    - "{{ rpmbuild_build_dir }}/SRPMS"
+    - "{{ rpmbuild_build_dir }}/RPMS"
+    - "{{ rpmbuild_build_dir }}/RPMS/noarch"
+    - "{{ rpmbuild_build_dir }}/RPMS/{{ ansible_userspace_architecture }}"
