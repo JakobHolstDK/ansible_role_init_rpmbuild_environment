@@ -5,6 +5,7 @@
   with_items:
   - "{{ rpmbuild_build_dir }}"
   - "{{ rpmbuild_build_dir }}/BUILD"
+  - "{{ rpmbuild_build_dir }}/DOWNLOADS"
   - "{{ rpmbuild_build_dir }}/SOURCES"
   - "{{ rpmbuild_build_dir }}/SPECS"
   - "{{ rpmbuild_build_dir }}/SRPMS"
